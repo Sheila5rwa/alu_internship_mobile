@@ -1,17 +1,25 @@
-# aluinternship
+# ALU Internship Hub
 
-A new Flutter project.
+ALU Internship Hub is a Flutter and Firebase mobile application that connects ALU students with student-led startups and early-stage ventures.
 
-## Getting Started
+## Features
+- Firebase Authentication for student and startup users
+- Onboarding and profile completion
+- Startup profile creation and verification flow
+- Opportunity posting for founders
+- Opportunity discovery and search for students
+- Application submission and tracking
 
-This project is a starting point for a Flutter application.
+## Architecture
+- Flutter with BLoC state management
+- Firebase Authentication for identity
+- Cloud Firestore for users, startups, opportunities, and applications
+- Clean separation between models, services, cubits, and screens
 
-A few resources to get you started if this is your first Flutter project:
+## Run locally
+1. Install Flutter SDK.
+2. Run `flutter pub get`.
+3. Run `flutter run`.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Verification
+- `flutter analyze` ✅

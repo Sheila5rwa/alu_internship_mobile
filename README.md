@@ -23,3 +23,9 @@ ALU Internship Hub is a Flutter and Firebase mobile application that connects AL
 
 ## Verification
 - `flutter analyze` ✅
+
+ALU-GRP-2026-99
+ALU-KIGALI-001
+ALU-DEMO-TEST
+ALU-12345
+.

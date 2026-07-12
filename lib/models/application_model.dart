@@ -15,6 +15,10 @@ class ApplicationModel {
   final String coverNote;
   final String status;
   final DateTime appliedAt;
+  final String interviewDate;
+  final String interviewTime;
+  final String interviewLink;
+  final String interviewNotes;
 
   const ApplicationModel({
     required this.id,
@@ -33,6 +37,10 @@ class ApplicationModel {
     required this.coverNote,
     required this.status,
     required this.appliedAt,
+    this.interviewDate = '',
+    this.interviewTime = '',
+    this.interviewLink = '',
+    this.interviewNotes = '',
   });
 
   Map<String, dynamic> toMap() {
@@ -53,6 +61,10 @@ class ApplicationModel {
       'coverNote': coverNote,
       'status': status,
       'appliedAt': appliedAt.toIso8601String(),
+      'interviewDate': interviewDate,
+      'interviewTime': interviewTime,
+      'interviewLink': interviewLink,
+      'interviewNotes': interviewNotes,
     };
   }
 
@@ -74,6 +86,10 @@ class ApplicationModel {
       coverNote: map['coverNote'] as String,
       status: map['status'] as String,
       appliedAt: DateTime.parse(map['appliedAt'] as String),
+      interviewDate: map['interviewDate'] as String? ?? '',
+      interviewTime: map['interviewTime'] as String? ?? '',
+      interviewLink: map['interviewLink'] as String? ?? '',
+      interviewNotes: map['interviewNotes'] as String? ?? '',
     );
   }
 }

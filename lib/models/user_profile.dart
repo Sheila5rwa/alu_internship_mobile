@@ -8,6 +8,7 @@ class UserProfile {
   final String? startupId;
   final String githubLink;
   final String portfolioLink;
+  final List<String> bookmarkedOpportunityIds;
 
   const UserProfile({
     required this.uid,
@@ -19,6 +20,7 @@ class UserProfile {
     this.startupId,
     this.githubLink = '',
     this.portfolioLink = '',
+    this.bookmarkedOpportunityIds = const [],
   });
 
   Map<String, dynamic> toMap() {
@@ -32,6 +34,7 @@ class UserProfile {
       'startupId': startupId,
       'githubLink': githubLink,
       'portfolioLink': portfolioLink,
+      'bookmarkedOpportunityIds': bookmarkedOpportunityIds,
     };
   }
 
@@ -46,6 +49,7 @@ class UserProfile {
       startupId: map['startupId'] as String?,
       githubLink: map['githubLink'] as String? ?? '',
       portfolioLink: map['portfolioLink'] as String? ?? '',
+      bookmarkedOpportunityIds: List<String>.from(map['bookmarkedOpportunityIds'] ?? const []),
     );
   }
 }

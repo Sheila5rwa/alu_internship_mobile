@@ -7,6 +7,8 @@ class StartupProfile {
   final String location;
   final String website;
   final bool isVerified;
+  final String status;
+  final String regCode;
   final DateTime createdAt;
 
   const StartupProfile({
@@ -18,6 +20,8 @@ class StartupProfile {
     required this.location,
     required this.website,
     required this.isVerified,
+    this.status = 'Pending',
+    this.regCode = '',
     required this.createdAt,
   });
 
@@ -31,6 +35,8 @@ class StartupProfile {
       'location': location,
       'website': website,
       'isVerified': isVerified,
+      'status': status,
+      'regCode': regCode,
       'createdAt': createdAt.toIso8601String(),
     };
   }
@@ -44,7 +50,9 @@ class StartupProfile {
       sector: map['sector'] as String,
       location: map['location'] as String,
       website: map['website'] as String,
-      isVerified: map['isVerified'] as bool,
+      isVerified: map['isVerified'] as bool? ?? false,
+      status: map['status'] as String? ?? 'Pending',
+      regCode: map['regCode'] as String? ?? '',
       createdAt: DateTime.parse(map['createdAt'] as String),
     );
   }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'application_tracker_screen.dart';
+import 'chat_hub_screen.dart';
 import 'home_screen.dart';
+import 'profile_screen.dart';
 
 class StudentNavigationShell extends StatefulWidget {
   const StudentNavigationShell({super.key});
@@ -16,6 +18,8 @@ class _StudentNavigationShellState extends State<StudentNavigationShell> {
   final List<Widget> _pages = [
     const HomeScreen(),
     ApplicationTrackerScreen(),
+    const ChatHubScreen(),
+    const ProfileScreen(),
   ];
 
   @override
@@ -28,6 +32,8 @@ class _StudentNavigationShellState extends State<StudentNavigationShell> {
         destinations: const [
           NavigationDestination(icon: Icon(Icons.explore_outlined), selectedIcon: Icon(Icons.explore), label: 'Explore'),
           NavigationDestination(icon: Icon(Icons.assignment_outlined), selectedIcon: Icon(Icons.assignment), label: 'Applications'),
+          NavigationDestination(icon: Icon(Icons.chat_bubble_outline), selectedIcon: Icon(Icons.chat_bubble), label: 'Messages'),
+          NavigationDestination(icon: Icon(Icons.person_outline), selectedIcon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
     );

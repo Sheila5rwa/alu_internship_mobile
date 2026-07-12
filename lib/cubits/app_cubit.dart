@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 import '../models/application_model.dart';
 import '../models/opportunity.dart';
@@ -73,9 +74,43 @@ class AppCubit extends Cubit<AppState> {
     }
   }
 
-  Future<void> completeProfile({required String name, required String bio, required String skills, required String role, String githubLink = '', String portfolioLink = ''}) async {
+  Future<void> completeProfile({
+    required String name,
+    required String bio,
+    required String skills,
+    required String role,
+    String githubLink = '',
+    String portfolioLink = '',
+    String startupName = '',
+    String startupMission = '',
+    String startupSector = '',
+    String startupLocation = '',
+    String startupWebsite = '',
+    String startupRegCode = '',
+  }) async {
     final user = _service.currentUser;
     if (user == null) return;
+
+    String? startupId;
+    if (role == 'startup') {
+      final startupProfileId = const Uuid().v4();
+      startupId = startupProfileId;
+      final startup = StartupProfile(
+        id: startupProfileId,
+        ownerId: user.uid,
+        name: startupName.isEmpty ? "$name's Venture" : startupName,
+        mission: startupMission.isEmpty ? "We solve problems on campus." : startupMission,
+        sector: startupSector.isEmpty ? "Technology" : startupSector,
+        location: startupLocation.isEmpty ? "ALU Rwanda" : startupLocation,
+        website: startupWebsite,
+        isVerified: false,
+        status: 'Pending',
+        regCode: startupRegCode,
+        createdAt: DateTime.now(),
+      );
+      await _service.createStartupProfile(startup);
+    }
+
     final profile = UserProfile(
       uid: user.uid,
       email: user.email ?? '',
@@ -83,6 +118,7 @@ class AppCubit extends Cubit<AppState> {
       role: role,
       bio: bio,
       skills: skills,
+      startupId: startupId,
       githubLink: githubLink,
       portfolioLink: portfolioLink,
     );
@@ -122,5 +158,34 @@ class AppCubit extends Cubit<AppState> {
 
   Future<void> updateApplicationStatus({required String applicationId, required String status}) async {
     await _service.updateApplicationStatus(applicationId: applicationId, status: status);
+  }
+
+  Future<void> toggleBookmark(String opportunityId) async {
+    final profile = state.currentProfile;
+    if (profile == null) return;
+
+    await _service.toggleBookmark(profile.uid, opportunityId);
+
+    final newList = List<String>.from(profile.bookmarkedOpportunityIds);
+    if (newList.contains(opportunityId)) {
+      newList.remove(opportunityId);
+    } else {
+      newList.add(opportunityId);
+    }
+
+    emit(state.copyWith(
+      currentProfile: UserProfile(
+        uid: profile.uid,
+        email: profile.email,
+        displayName: profile.displayName,
+        role: profile.role,
+        bio: profile.bio,
+        skills: profile.skills,
+        startupId: profile.startupId,
+        githubLink: profile.githubLink,
+        portfolioLink: profile.portfolioLink,
+        bookmarkedOpportunityIds: newList,
+      ),
+    ));
   }
 }

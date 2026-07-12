@@ -26,7 +26,10 @@ class AppShell extends StatelessWidget {
         }
         if (authStatus == AuthStatus.authenticated) {
           final profile = state.currentProfile;
-          if (profile?.role == 'startup') {
+          if (profile == null || (profile.bio.isEmpty && profile.skills.isEmpty)) {
+            return const ProfileSetupScreen();
+          }
+          if (profile.role == 'startup') {
             return const StartupNavigationShell();
           }
           return const StudentNavigationShell();

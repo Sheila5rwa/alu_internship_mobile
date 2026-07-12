@@ -6,6 +6,7 @@ import 'app_router.dart';
 import 'cubits/app_cubit.dart';
 import 'firebase_options.dart';
 import 'services/firebase_service.dart';
+import 'theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,11 +25,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'ALU Internship Hub',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF0E6BA8)),
-          useMaterial3: true,
-          scaffoldBackgroundColor: const Color(0xFFF5F8FC),
-        ),
+        theme: AluTheme.lightTheme,
         home: const AppShell(),
       ),
     );
